@@ -1,10 +1,39 @@
-// Composant Hero: components/Hero.tsx
 import { useLanguage } from '@/app/context/LanguageContext';
 import { motion } from 'framer-motion';
 import { Code, Github, Linkedin, Mail, Palette } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 export default function Hero() {
-    const { language, translations } = useLanguage();
+    const { translations } = useLanguage();
+
+    const texts = [translations.hero.name, translations.hero.title]; // les deux textes à alterner
+    const [displayedText, setDisplayedText] = useState('');
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [charIndex, setCharIndex] = useState(0);
+
+    useEffect(() => {
+        const currentText = texts[currentIndex];
+        let typingSpeed = isDeleting ? 50 : 120;
+
+        const timeout = setTimeout(() => {
+            if (!isDeleting && charIndex < currentText.length) {
+                setDisplayedText(prev => prev + currentText[charIndex]);
+                setCharIndex(prev => prev + 1);
+            } else if (isDeleting && charIndex > 0) {
+                setDisplayedText(prev => prev.slice(0, -1));
+                setCharIndex(prev => prev - 1);
+            } else if (!isDeleting && charIndex === currentText.length) {
+                // petite pause avant d'effacer
+                setTimeout(() => setIsDeleting(true), 1000);
+            } else if (isDeleting && charIndex === 0) {
+                setIsDeleting(false);
+                setCurrentIndex((prev) => (prev + 1) % texts.length);
+            }
+        }, typingSpeed);
+
+        return () => clearTimeout(timeout);
+    }, [charIndex, isDeleting, currentIndex, texts]);
 
     return (
         <section id="home" className="min-h-screen flex items-center justify-center pt-20 px-4">
@@ -16,7 +45,12 @@ export default function Hero() {
                     transition={{ duration: 0.8 }}
                 >
                     <h1 className="text-4xl md:text-6xl font-bold mb-4">
-                        {translations.hero.title}
+                        <span
+                            dangerouslySetInnerHTML={{
+                                __html: displayedText.replace(/\n/g, "<br />"),
+                            }}
+                        />
+                        <span className="border-r-2 border-purple-400 animate-pulse ml-1"></span>
                     </h1>
                     <p className="text-xl md:text-2xl text-purple-300 mb-6">
                         {translations.hero.subtitle}
@@ -24,7 +58,7 @@ export default function Hero() {
                     <p className="text-lg mb-8 max-w-lg">
                         {translations.hero.description}
                     </p>
-                    <div className="flex justify-center lg:justify-start space-x-6 my-8">
+                    <div className="flex justify-start space-x-6 my-8">
                         <a href="#" className="text-gray-400 hover:text-white transition-colors">
                             <Github className="w-6 h-6" />
                         </a>

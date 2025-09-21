@@ -13,7 +13,11 @@ interface StatItem {
   label: string;
 }
 
-const Statistics = () => {
+interface StatsProps {
+  statistics: StatItem[];
+}
+
+const Statistics = ({ statistics }: StatsProps) => {
   const { translations } = useLanguage();
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -21,13 +25,6 @@ const Statistics = () => {
   });
 
   const [hasAnimated, setHasAnimated] = useState(false);
-
-  const statsData: StatItem[] = [
-    { id: 1, value: 1500, suffix: '+', label: translations.stats?.visitors || 'Visiteurs' },
-    { id: 2, value: 24, suffix: '+', label: translations.stats?.projects || 'Projets' },
-    { id: 3, value: 98, suffix: '%', label: translations.stats?.satisfaction || 'Satisfaction' },
-    { id: 4, value: 500, suffix: '+', label: translations.stats?.reactions || 'Réactions' },
-  ];
 
   useEffect(() => {
     if (inView && !hasAnimated) {
@@ -45,7 +42,7 @@ const Statistics = () => {
       </div>
 
       <div className="container mx-auto relative z-10">
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -61,7 +58,7 @@ const Statistics = () => {
         </motion.div>
 
         <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {statsData.map((stat, index) => (
+          {statistics.map((stat, index) => (
             <motion.div
               key={stat.id}
               className="text-center p-6 bg-gray-800 rounded-xl hover:bg-gray-750 transition-colors duration-300 group"
@@ -69,21 +66,30 @@ const Statistics = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              whileHover={{ 
+              whileHover={{
                 scale: 1.05,
                 transition: { duration: 0.2 }
               }}
             >
               <div className="relative">
                 <div className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400 mb-2">
-                  <AnimatedCounter 
-                    value={stat.value} 
-                    suffix={stat.suffix} 
-                    shouldAnimate={inView && !hasAnimated} 
+                  <AnimatedCounter
+                    value={stat.value}
+                    suffix={stat.suffix}
+                    shouldAnimate={inView && !hasAnimated}
                   />
                 </div>
                 <div className="w-16 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto mb-4 group-hover:w-20 transition-all duration-300"></div>
-                <p className="text-gray-400 text-lg">{stat.label}</p>
+                <p className="text-gray-400 text-lg">
+                  {
+                    stat.label === "Visiteurs" ?
+                      translations.stats?.visitors :
+                      stat.label === "Projets" ?
+                        translations.stats?.projects :
+                        stat.label === "Satisfaction" ?
+                          translations.stats?.satisfaction :
+                          translations.stats?.reactions
+                  }</p>
               </div>
             </motion.div>
           ))}
@@ -103,7 +109,7 @@ const AnimatedCounter = ({ value, suffix = '', shouldAnimate }: { value: number,
       const steps = 60; // 60 frames
       const increment = value / steps;
       let current = 0;
-      
+
       const timer = setInterval(() => {
         current += increment;
         if (current >= value) {
@@ -122,7 +128,7 @@ const AnimatedCounter = ({ value, suffix = '', shouldAnimate }: { value: number,
 
   return (
     <span>
-      {count}{suffix}
+      {count}{count > 5 ? suffix : ""}
     </span>
   );
 };

@@ -9,75 +9,25 @@ interface Project {
   title: string;
   description: string;
   image: string;
-  tags: string[];
+  techStack: string[];
   category: string;
   year: number;
   link: string;
 }
 
-// Données simulées (à remplacer par un appel à votre base de données)
-const projectsData: Project[] = [
-  {
-    id: 1,
-    title: "Application E-commerce",
-    description: "Plateforme e-commerce complète avec panier, paiement et administration.",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=300&fit=crop",
-    tags: ["React", "Node.js", "MongoDB", "Tailwind"],
-    category: "web",
-    year: 2023,
-    link: "#"
-  },
-  {
-    id: 2,
-    title: "App Mobile Fitness",
-    description: "Application de suivi d'activité physique avec statistiques personnalisées.",
-    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=300&fit=crop",
-    tags: ["React Native", "Firebase", "Redux"],
-    category: "mobile",
-    year: 2023,
-    link: "#"
-  },
-  {
-    id: 3,
-    title: "Design System",
-    description: "Système de design complet avec composants et guidelines.",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=300&fit=crop",
-    tags: ["Figma", "UI/UX", "Design"],
-    category: "design",
-    year: 2022,
-    link: "#"
-  },
-  {
-    id: 4,
-    title: "Plateforme SaaS",
-    description: "Solution SaaS de gestion de projet avec équipes en temps réel.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=300&fit=crop",
-    tags: ["Next.js", "TypeScript", "PostgreSQL", "WebSockets"],
-    category: "web",
-    year: 2022,
-    link: "#"
-  },
-  {
-    id: 5,
-    title: "Identité Visuelle",
-    description: "Refonte complète de l'identité visuelle pour une startup tech.",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=300&fit=crop",
-    tags: ["Logo", "Branding", "Illustration"],
-    category: "design",
-    year: 2021,
-    link: "#"
-  }
-];
+interface ProjectsProps {
+  projects: Project[];
+}
 
-export default function Projects() {
+export default function Projects({ projects }: ProjectsProps) {
   const { translations } = useLanguage();
   const [filter, setFilter] = useState('all');
-  const [filteredProjects, setFilteredProjects] = useState<Project[]>(projectsData);
+  const [filteredProjects, setFilteredProjects] = useState<Project[]>(projects);
   const [selectedYear, setSelectedYear] = useState<string>('all');
   const years = ['all', '2023', '2022', '2021'];
 
   useEffect(() => {
-    let result = projectsData;
+    let result = projects;
     
     if (filter !== 'all') {
       result = result.filter(project => project.category === filter);
@@ -180,9 +130,9 @@ export default function Projects() {
                   <h3 className="text-xl font-bold mb-2">{project.title}</h3>
                   <p className="text-gray-400 mb-4">{project.description}</p>
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map(tag => (
-                      <span key={tag} className="px-2 py-1 bg-gray-800 text-sm rounded-md">
-                        {tag}
+                    {project.techStack.map(stack => (
+                      <span key={stack} className="px-2 py-1 bg-gray-800 text-sm rounded-md">
+                        {stack}
                       </span>
                     ))}
                   </div>
