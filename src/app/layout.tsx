@@ -1,4 +1,3 @@
-// app/layout.tsx
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
@@ -7,8 +6,29 @@ import { LanguageProvider } from './context/LanguageContext';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Portfolio Développeur Web & Design',
+  title: 'Portfolio Développeur Web & mobile',
   description: 'Portfolio de développement web, mobile et design',
+  metadataBase: new URL('https://votre-domain.com'), // Remplacez par votre domaine
+  openGraph: {
+    title: 'Portfolio Développeur Web & mobile',
+    description: 'Portfolio de développement web, mobile et design',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dmfjhas5a/image/upload/v1758637700/profile_aarjez.jpg', // Chemin relatif depuis le dossier public
+        width: 1200,
+        height: 630,
+        alt: 'Portfolio Développeur Web & mobile',
+      },
+    ],
+    type: 'website',
+    locale: 'fr_FR',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Portfolio Développeur Web & mobile',
+    description: 'Portfolio de développement web, mobile et design',
+    images: ['https://res.cloudinary.com/dmfjhas5a/image/upload/v1758637700/profile_aarjez.jpg'], // Même image que pour Open Graph
+  },
 };
 
 export default function RootLayout({
