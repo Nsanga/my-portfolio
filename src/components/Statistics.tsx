@@ -60,7 +60,7 @@ const Statistics = ({ statistics }: StatsProps) => {
         <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {statistics.map((stat, index) => (
             <motion.div
-              key={stat.id}
+              key={index}
               className="text-center p-6 bg-gray-800 rounded-xl hover:bg-gray-750 transition-colors duration-300 group"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

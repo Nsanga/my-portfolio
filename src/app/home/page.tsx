@@ -29,21 +29,19 @@ export default function PortfolioHome() {
                 const [
                     statisticsRes, 
                     projectsRes, 
-                    // experiencesRes, 
+                    experiencesRes, 
                     // skillsRes, 
                     // educationsRes
                 ] = await Promise.all([
                     axios.get('/api/statistics'),
                     axios.get('/api/projects'),
-                    // axios.get('/api/experiences'),
+                    axios.get('/api/experiences'),
                     // axios.get('/api/portfolio?model=education'),
                     // axios.get('/api/portfolio?model=statistic'),
                 ]);
 
                 setProjects(projectsRes.data);
-                // setExperiences(experiencesRes.data);
-                // setSkills(skillsRes.data);
-                // setEducations(educationsRes.data);
+                setExperiences(experiencesRes.data);
                 setStatistics(statisticsRes.data);
             } catch (err) {
                 setError('Failed to load portfolio data');
@@ -108,7 +106,7 @@ export default function PortfolioHome() {
             <Hero />
             <Statistics statistics={statistics} />
             <Projects projects={projects} />
-            <Experience />
+            <Experience experiences={experiences} />
             <Contact />
             <Footer />
         </div>

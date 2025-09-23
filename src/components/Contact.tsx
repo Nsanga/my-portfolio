@@ -23,25 +23,24 @@ export default function Contact() {
         e.preventDefault();
         setIsSubmitting(true);
 
-        // Simulation d'envoi (à remplacer par un appel à votre API)
         try {
-            // Ici, vous intégrerez Resend, Nodemailer ou autre service d'email
-            await new Promise(resolve => setTimeout(resolve, 1500));
+            const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
 
-            // Simuler un succès aléatoire pour la démo
-            const isSuccess = Math.random() > 0.3;
-
-            if (isSuccess) {
-                setSubmitStatus('success');
-                setFormData({ name: '', email: '', message: '' });
+            if (res.ok) {
+                setSubmitStatus("success");
+                setFormData({ name: "", email: "", message: "" });
             } else {
-                throw new Error('Simulated error');
+                throw new Error("Erreur API");
             }
         } catch (error) {
-            setSubmitStatus('error');
+            setSubmitStatus("error");
         } finally {
             setIsSubmitting(false);
-            setTimeout(() => setSubmitStatus('idle'), 5000);
+            setTimeout(() => setSubmitStatus("idle"), 5000);
         }
     };
 

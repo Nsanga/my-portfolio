@@ -16,61 +16,17 @@ interface ExperienceItem {
   technologies: string[];
 }
 
-// Données simulées (à remplacer par un appel à votre base de données)
-const experienceData: ExperienceItem[] = [
-  {
-    id: 1,
-    type: 'experience',
-    title: 'Développeur Full Stack',
-    company: 'Tech Innovations',
-    location: 'Paris, France',
-    startDate: '2022-01',
-    endDate: null,
-    description: 'Développement d\'applications web et mobile. Conception d\'architectures frontend et backend.',
-    technologies: ['React', 'Node.js', 'TypeScript', 'MongoDB']
-  },
-  {
-    id: 2,
-    type: 'experience',
-    title: 'Développeur Frontend',
-    company: 'Digital Solutions',
-    location: 'Lyon, France',
-    startDate: '2020-06',
-    endDate: '2021-12',
-    description: 'Création d\'interfaces utilisateur responsive. Collaboration avec les designers UX/UI.',
-    technologies: ['React', 'Vue.js', 'SASS', 'Figma']
-  },
-  {
-    id: 3,
-    type: 'education',
-    title: 'Master en Développement Web',
-    company: 'Université Technologique',
-    location: 'Paris, France',
-    startDate: '2018-09',
-    endDate: '2020-06',
-    description: 'Spécialisation en architectures modernes et expérience utilisateur.',
-    technologies: ['JavaScript', 'React', 'Node.js', 'UI/UX']
-  },
-  {
-    id: 4,
-    type: 'education',
-    title: 'Licence en Informatique',
-    company: 'Université des Sciences',
-    location: 'Lille, France',
-    startDate: '2015-09',
-    endDate: '2018-06',
-    description: 'Fondements de la programmation, algorithmes et structures de données.',
-    technologies: ['Java', 'Python', 'C++', 'SQL']
-  }
-];
+interface ExperiencesProps {
+  experiences: ExperienceItem[];
+}
 
-export default function Experience() {
+export default function Experience({ experiences }: ExperiencesProps) {
   const { translations } = useLanguage();
   const [activeTab, setActiveTab] = useState<'experience' | 'education'>('experience');
   const [items, setItems] = useState<ExperienceItem[]>([]);
 
   useEffect(() => {
-    const filtered = experienceData.filter(item => item.type === activeTab);
+    const filtered = experiences.filter(item => item.type === activeTab);
     setItems(filtered);
   }, [activeTab]);
 
@@ -135,7 +91,7 @@ export default function Experience() {
             <div className="space-y-12">
               {items.map((item, index) => (
                 <motion.div 
-                  key={item.id}
+                  key={index}
                   className="flex"
                   initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -157,7 +113,7 @@ export default function Experience() {
                           <h3 className="text-xl font-bold">{item.title}</h3>
                           <p className="text-purple-300">{item.company} • {item.location}</p>
                         </div>
-                        <div className="mt-2 md:mt-0 text-sm text-gray-400">
+                        <div className="mt-2 md:mt-0 text-sm text-gray-400 capitalize">
                           {formatDate(item.startDate)} - {formatDate(item.endDate)}
                         </div>
                       </div>
