@@ -1,6 +1,7 @@
 import { useLanguage } from '@/app/context/LanguageContext';
 import { motion } from 'framer-motion';
 import { Code, Github, Linkedin, Mail, Palette } from 'lucide-react';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
 export default function Hero() {
@@ -89,7 +90,7 @@ export default function Hero() {
                         <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
                             <div className="absolute inset-0 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full animate-pulse opacity-70"></div>
                             <div className="absolute inset-4 border-4 border-white rounded-full animate-ping opacity-20"></div>
-                            <img
+                            <Image
                                 src="/profile.jpg" // Remplacez par le chemin de votre image
                                 alt="Profile"
                                 className="relative z-10 w-full h-full object-cover rounded-full border-4 border-gray-800 shadow-xl"

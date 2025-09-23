@@ -17,10 +17,10 @@ export default function PortfolioHome() {
     const [isLoading, setIsLoading] = useState(true);
     const [projects, setProjects] = useState([]);
     const [experiences, setExperiences] = useState([]);
-    const [skills, setSkills] = useState([]);
-    const [educations, setEducations] = useState([]);
+    // const [skills, setSkills] = useState([]);
+    // const [educations, setEducations] = useState([]);
     const [statistics, setStatistics] = useState([]);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {

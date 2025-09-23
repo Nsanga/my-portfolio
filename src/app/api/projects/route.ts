@@ -16,18 +16,6 @@ export async function GET(req: Request) {
   }
 }
 
-// GET project by id
-export async function GET_BY_ID(id: string) {
-  try {
-    const project = await prisma.project.findUnique({ where: { id } });
-    if (!project)
-      return NextResponse.json({ error: "Projet non trouvé" }, { status: 404 });
-    return NextResponse.json(project);
-  } catch (error) {
-    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
-  }
-}
-
 // POST new project
 export async function POST(req: Request) {
   try {

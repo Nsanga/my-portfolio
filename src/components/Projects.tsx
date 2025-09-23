@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/app/context/LanguageContext';
+import Image from 'next/image';
 
 // Types pour les projets
 interface Project {
@@ -120,7 +121,7 @@ export default function Projects({ projects }: ProjectsProps) {
                 className="bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
               >
                 <div className="h-48 overflow-hidden">
-                  <img 
+                  <Image 
                     src={project.image} 
                     alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"

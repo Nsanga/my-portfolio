@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { Code, Palette, Smartphone } from 'lucide-react';
+import Image from 'next/image';
 
 const CustomLoadingScreen = () => {
     const [progress, setProgress] = useState(0);
@@ -87,7 +88,7 @@ const CustomLoadingScreen = () => {
                 <div className="text-center mb-4">
                     <div className="w-20 h-20 mx-auto bg-gradient-to-r from-purple-500 to-pink-500 rounded-full p-1 mb-4">
                         <div className="w-full h-full bg-slate-900 rounded-full flex items-center justify-center">
-                            <img
+                            <Image
                                 src="/profile.jpg"
                                 alt="Profile"
                                 className="relative z-10 w-full h-full object-cover rounded-full border-4 border-gray-800 shadow-xl"

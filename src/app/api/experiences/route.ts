@@ -43,37 +43,8 @@ export async function POST(req: Request) {
   }
 }
 
-// GET one experience
-export async function GET_BY_ID(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
-  try {
-    const experience = await prisma.experience.findUnique({
-      where: { id: Number(params.id) },
-    });
-
-    if (!experience) {
-      return NextResponse.json(
-        { error: "Expérience non trouvée" },
-        { status: 404 }
-      );
-    }
-
-    return NextResponse.json(experience);
-  } catch (error) {
-    return NextResponse.json(
-      { error: "Impossible de récupérer l'expérience" },
-      { status: 500 }
-    );
-  }
-}
-
 // UPDATE experience
-export async function PUT(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
+export async function PUT(req: Request) {
   try {
     const body = await req.json();
 
@@ -93,7 +64,7 @@ export async function PUT(
 
     return NextResponse.json(updatedExperience);
   } catch (error) {
-    console.log("==========error===========", error)
+    console.log("==========error===========", error);
     return NextResponse.json(
       { error: "Impossible de mettre à jour l'expérience" },
       { status: 500 }
@@ -102,13 +73,11 @@ export async function PUT(
 }
 
 // DELETE experience
-export async function DELETE(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
+export async function DELETE(req: Request) {
   try {
+    const { id } = await req.json();
     await prisma.experience.delete({
-      where: { id: Number(params.id) },
+      where: { id },
     });
 
     return NextResponse.json({ message: "Expérience supprimée avec succès" });
