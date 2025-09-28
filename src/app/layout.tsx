@@ -6,12 +6,12 @@ import { LanguageProvider } from './context/LanguageContext';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Portfolio Développeur Web & mobile',
-  description: 'Portfolio de développement web, mobile et design',
+  title: 'Mercure Mekinda: Développeur Web & mobile',
+  description: 'Développeur web & mobile passionné.',
   metadataBase: new URL('https://votre-domain.com'), // Remplacez par votre domaine
   openGraph: {
-    title: 'Portfolio Développeur Web & mobile',
-    description: 'Portfolio de développement web, mobile et design',
+    title: 'Mercure Mekinda: Développeur Web & mobile',
+    description: 'Développeur web & mobile passionné.',
     images: [
       {
         url: 'https://res.cloudinary.com/dmfjhas5a/image/upload/v1758637700/profile_aarjez.jpg', // Chemin relatif depuis le dossier public
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Portfolio Développeur Web & mobile',
-    description: 'Portfolio de développement web, mobile et design',
+    title: 'Mercure Mekinda: Développeur Web & mobile',
+    description: 'Développeur web & mobile passionné.',
     images: ['https://res.cloudinary.com/dmfjhas5a/image/upload/v1758637700/profile_aarjez.jpg'], // Même image que pour Open Graph
   },
 };
