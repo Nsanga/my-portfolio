@@ -91,6 +91,8 @@ const CustomLoadingScreen = () => {
                             <Image
                                 src="/profile.jpg"
                                 alt="Profile"
+                                width={72}
+                                height={72}
                                 className="relative z-10 w-full h-full object-cover rounded-full border-4 border-gray-800 shadow-xl"
                             />
                         </div>

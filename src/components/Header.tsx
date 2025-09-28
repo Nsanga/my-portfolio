@@ -3,6 +3,7 @@ import { useState } from 'react';
 import LanguageToggle from './LanguageToggle';
 import { useLanguage } from '@/app/context/LanguageContext';
 import MercureMekinda from './MercureMekinda';
+import Link from 'next/link';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,13 +15,13 @@ export default function Header() {
     { name: translations.nav.experience, href: '#experience' },
     { name: translations.nav.contact, href: '#contact' },
   ];
-
+  
   return (
     <header className="fixed top-0 w-full bg-gray-900 bg-opacity-90 backdrop-blur-sm z-50 py-4 px-4 shadow-lg">
       <div className="container mx-auto flex justify-between items-center">
-        <a href="#home" className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+        <Link href="/" className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
           <MercureMekinda />
-        </a>
+        </Link>
         
         {/* Navigation Desktop */}
         <nav className="hidden md:flex space-x-8 items-center">

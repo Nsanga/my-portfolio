@@ -1,8 +1,8 @@
 import { useLanguage } from '@/app/context/LanguageContext';
 import { motion } from 'framer-motion';
-import { Code, Github, Linkedin, Mail, Palette } from 'lucide-react';
-import Image from 'next/image';
+import { Github, Linkedin, Mail } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import EnhancedProfileSection from './EnhancedProfileSection';
 
 export default function Hero() {
     const { translations } = useLanguage();
@@ -34,7 +34,7 @@ export default function Hero() {
         }, typingSpeed);
 
         return () => clearTimeout(timeout);
-    }, [charIndex, isDeleting, currentIndex]);
+    }, [charIndex, isDeleting, currentIndex, texts]);
 
     return (
         <section id="home" className="min-h-screen flex items-center justify-center pt-20 px-4">
@@ -60,13 +60,13 @@ export default function Hero() {
                         {translations.hero.description}
                     </p>
                     <div className="flex justify-start space-x-6 my-8">
-                        <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                        <a href="https://github.com/Nsanga" className="text-gray-400 hover:text-white transition-colors">
                             <Github className="w-6 h-6" />
                         </a>
-                        <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                        <a href="https://www.linkedin.com/in/mercure-mekinda-694133165/" className="text-gray-400 hover:text-white transition-colors">
                             <Linkedin className="w-6 h-6" />
                         </a>
-                        <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                        <a href="mailto:mercuremekinda@gmail.com" className="text-gray-400 hover:text-white transition-colors">
                             <Mail className="w-6 h-6" />
                         </a>
                     </div>
@@ -81,29 +81,12 @@ export default function Hero() {
                 </motion.div>
 
                 <motion.div
-                    className="md:w-1/2 flex justify-center"
+                    className="md:w-1/2 flex justify-end"
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                    <div className="relative">
-                        <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
-                            <div className="absolute inset-0 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full animate-pulse opacity-70"></div>
-                            <div className="absolute inset-4 border-4 border-white rounded-full animate-ping opacity-20"></div>
-                            <Image
-                                src="/profile.jpg" // Remplacez par le chemin de votre image
-                                alt="Profile"
-                                className="relative z-10 w-full h-full object-cover rounded-full border-4 border-gray-800 shadow-xl"
-                            />
-                        </div>
-                        {/* Floating Elements */}
-                        <div className="absolute top-0 md:-top-10 left-0 bg-purple-500/20 backdrop-blur-sm rounded-lg p-4 animate-bounce">
-                            <Code className="w-8 h-8 text-purple-400" />
-                        </div>
-                        <div className="absolute -bottom-10 right-0 bg-pink-500/20 backdrop-blur-sm rounded-lg p-4 animate-pulse">
-                            <Palette className="w-8 h-8 text-pink-400" />
-                        </div>
-                    </div>
+                    <EnhancedProfileSection />
                 </motion.div>
             </div>
         </section>

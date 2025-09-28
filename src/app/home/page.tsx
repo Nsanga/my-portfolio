@@ -27,9 +27,9 @@ export default function PortfolioHome() {
             try {
                 // Fetch all data in parallel
                 const [
-                    statisticsRes, 
-                    projectsRes, 
-                    experiencesRes, 
+                    statisticsRes,
+                    projectsRes,
+                    experiencesRes,
                     // skillsRes, 
                     // educationsRes
                 ] = await Promise.all([
@@ -78,12 +78,20 @@ export default function PortfolioHome() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-pink-900 text-white animate-gradient">
+        <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-pink-900 text-white animate-gradient overflow-y-hidden">
             <Head>
                 <title>{language === 'fr' ? 'Portfolio Développeur Web & Design' : 'Web & Mobile Developer Portfolio'}</title>
                 <meta name="description" content={language === 'fr' ? 'Portfolio de développement web, mobile et design' : 'Web, mobile development and design portfolio'} />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
+            <Header />
+            <Hero />
+            <Statistics statistics={statistics} />
+            <Projects projects={projects} />
+            <Experience experiences={experiences} />
+            <Contact />
+            <Footer />
+
             <style jsx global>{`
                 @keyframes gradient {
                     0% {
@@ -101,14 +109,6 @@ export default function PortfolioHome() {
                     animation: gradient 15s ease infinite;
                 }
             `}</style>
-
-            <Header />
-            <Hero />
-            <Statistics statistics={statistics} />
-            <Projects projects={projects} />
-            <Experience experiences={experiences} />
-            <Contact />
-            <Footer />
         </div>
     );
 }

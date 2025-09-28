@@ -76,7 +76,7 @@ const translationsMap: Record<Language, Translations> = {
             cv: 'Télécharger CV'
         },
         hero: {
-            name: `Salut 👋,\nJe suis Mercure Mekinda`,
+            name: `Salut 👋,\nJe suis Mercure`,
             title: 'Développeur Web & Mobile Passionné',
             subtitle: 'Créatif & Innovant',
             description: 'Je conçois et développe des expériences utilisateur exceptionnelles avec un focus sur le design et les performances.',
@@ -128,7 +128,7 @@ const translationsMap: Record<Language, Translations> = {
             cv: 'Download CV'
         },
         hero: {
-            name: `Hey 👋,\nI'm Mercure Mekinda`,
+            name: `Hey 👋,\nI'm Mercure`,
             title: 'Passionate Web & Mobile Developer',
             subtitle: 'Creative & Innovative',
             description: 'I design and develop exceptional user experiences with a focus on design and performance.',

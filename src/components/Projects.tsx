@@ -29,22 +29,22 @@ export default function Projects({ projects }: ProjectsProps) {
 
   useEffect(() => {
     let result = projects;
-    
+
     if (filter !== 'all') {
       result = result.filter(project => project.category === filter);
     }
-    
+
     if (selectedYear !== 'all') {
       result = result.filter(project => project.year === parseInt(selectedYear));
     }
-     
+
     setFilteredProjects(result);
   }, [filter, selectedYear, projects]);
 
   return (
     <section id="projects" className="py-20 px-4 bg-gray-800">
       <div className="container mx-auto">
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -56,40 +56,40 @@ export default function Projects({ projects }: ProjectsProps) {
         </motion.div>
 
         {/* Filtres */}
-        <motion.div 
+        <motion.div
           className="flex flex-wrap justify-center gap-4 mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <button 
+          <button
             className={`px-4 py-2 rounded-lg transition-all ${filter === 'all' ? 'bg-purple-600 text-white' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'}`}
             onClick={() => setFilter('all')}
           >
             {translations.projects.filterAll}
           </button>
-          <button 
+          <button
             className={`px-4 py-2 rounded-lg transition-all ${filter === 'web' ? 'bg-purple-600 text-white' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'}`}
             onClick={() => setFilter('web')}
           >
             {translations.projects.filterWeb}
           </button>
-          <button 
+          <button
             className={`px-4 py-2 rounded-lg transition-all ${filter === 'mobile' ? 'bg-purple-600 text-white' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'}`}
             onClick={() => setFilter('mobile')}
           >
             {translations.projects.filterMobile}
           </button>
-          <button 
+          <button
             className={`px-4 py-2 rounded-lg transition-all ${filter === 'design' ? 'bg-purple-600 text-white' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'}`}
             onClick={() => setFilter('design')}
           >
             {translations.projects.filterDesign}
           </button>
-          
+
           {/* Filtre par année */}
-          <select 
+          <select
             className="px-4 py-2 rounded-lg bg-gray-700 text-gray-300"
             value={selectedYear}
             onChange={(e) => setSelectedYear(e.target.value)}
@@ -103,7 +103,7 @@ export default function Projects({ projects }: ProjectsProps) {
         </motion.div>
 
         {/* Liste des projets */}
-        <motion.div 
+        <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -121,9 +121,11 @@ export default function Projects({ projects }: ProjectsProps) {
                 className="bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
               >
                 <div className="h-48 overflow-hidden">
-                  <Image 
-                    src={project.image} 
+                  <Image
+                    src={project.image}
                     alt={project.title}
+                    width={400}
+                    height={192}
                     className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                   />
                 </div>
@@ -139,8 +141,8 @@ export default function Projects({ projects }: ProjectsProps) {
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-500">{project.year}</span>
-                    <a 
-                      href={project.link} 
+                    <a
+                      href={project.link}
                       className="text-purple-400 hover:text-purple-300 flex items-center"
                     >
                       {translations.projects.viewProject}
@@ -156,7 +158,7 @@ export default function Projects({ projects }: ProjectsProps) {
         </motion.div>
 
         {filteredProjects.length === 0 && (
-          <motion.div 
+          <motion.div
             className="text-center py-12"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
