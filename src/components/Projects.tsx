@@ -37,7 +37,7 @@ export default function Projects({ projects }: ProjectsProps) {
     if (selectedYear !== 'all') {
       result = result.filter(project => project.year === parseInt(selectedYear));
     }
-    
+     
     setFilteredProjects(result);
   }, [filter, selectedYear, projects]);
 
