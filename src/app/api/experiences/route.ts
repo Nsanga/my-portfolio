@@ -10,7 +10,7 @@ export async function GET() {
     return NextResponse.json(experiences);
   } catch (error) {
     return NextResponse.json(
-      { error: "Impossible de récupérer les expériences" },
+      { error: error || "Impossible de récupérer les expériences" },
       { status: 500 }
     );
   }
@@ -37,7 +37,7 @@ export async function POST(req: Request) {
     return NextResponse.json(newExperience);
   } catch (error) {
     return NextResponse.json(
-      { error: "Impossible de créer l'expérience" },
+      { error: error || "Impossible de créer l'expérience" },
       { status: 500 }
     );
   }
@@ -66,7 +66,7 @@ export async function PUT(req: Request) {
   } catch (error) {
     console.log("==========error===========", error);
     return NextResponse.json(
-      { error: "Impossible de mettre à jour l'expérience" },
+      { error: error || "Impossible de mettre à jour l'expérience" },
       { status: 500 }
     );
   }
@@ -83,7 +83,7 @@ export async function DELETE(req: Request) {
     return NextResponse.json({ message: "Expérience supprimée avec succès" });
   } catch (error) {
     return NextResponse.json(
-      { error: "Impossible de supprimer l'expérience" },
+      { error: error || "Impossible de supprimer l'expérience" },
       { status: 500 }
     );
   }

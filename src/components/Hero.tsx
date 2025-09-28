@@ -15,7 +15,7 @@ export default function Hero() {
 
     useEffect(() => {
         const currentText = texts[currentIndex];
-        let typingSpeed = isDeleting ? 50 : 120;
+        const typingSpeed = isDeleting ? 50 : 120;
 
         const timeout = setTimeout(() => {
             if (!isDeleting && charIndex < currentText.length) {
@@ -34,7 +34,7 @@ export default function Hero() {
         }, typingSpeed);
 
         return () => clearTimeout(timeout);
-    }, [charIndex, isDeleting, currentIndex, texts]);
+    }, [charIndex, isDeleting, currentIndex]);
 
     return (
         <section id="home" className="min-h-screen flex items-center justify-center pt-20 px-4">

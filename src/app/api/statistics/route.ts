@@ -21,6 +21,6 @@ export async function GET() {
     return NextResponse.json(stats);
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: "Impossible de récupérer les statistiques" }, { status: 500 });
+    return NextResponse.json({ error: error || "Impossible de récupérer les statistiques" }, { status: 500 });
   }
 }

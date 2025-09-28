@@ -43,7 +43,7 @@ export async function POST(req: Request) {
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { error: "Erreur lors de l’envoi du message" },
+      { error: error || "Erreur lors de l’envoi du message" },
       { status: 500 }
     );
   }

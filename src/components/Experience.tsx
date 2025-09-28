@@ -28,7 +28,7 @@ export default function Experience({ experiences }: ExperiencesProps) {
   useEffect(() => {
     const filtered = experiences.filter(item => item.type === activeTab);
     setItems(filtered);
-  }, [activeTab]);
+  }, [activeTab, experiences]);
 
   const formatDate = (dateString: string | null) => {
     if (!dateString) return translations.experience.present;

@@ -3,7 +3,6 @@ import { prisma } from "@/lib/prisma";
 
 // GET by ID
 export async function GET(
-  req: Request,
   { params }: { params: { id: string } }
 ) {
   try {
@@ -15,7 +14,7 @@ export async function GET(
     }
     return NextResponse.json(project);
   } catch (error) {
-    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
+    return NextResponse.json({ error: error || "Erreur serveur" }, { status: 500 });
   }
 }
 
@@ -33,7 +32,7 @@ export async function PATCH(
     return NextResponse.json(updated);
   } catch (error) {
     return NextResponse.json(
-      { error: "Erreur lors de la mise à jour" },
+      { error: error || "Erreur lors de la mise à jour" },
       { status: 500 }
     );
   }
@@ -41,7 +40,6 @@ export async function PATCH(
 
 // DELETE by ID
 export async function DELETE(
-  req: Request,
   { params }: { params: { id: string } }
 ) {
   try {
@@ -51,7 +49,7 @@ export async function DELETE(
     return NextResponse.json({ message: "Projet supprimé avec succès" });
   } catch (error) {
     return NextResponse.json(
-      { error: "Erreur lors de la suppression" },
+      { error: error || "Erreur lors de la suppression" },
       { status: 500 }
     );
   }

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 // GET all projects
-export async function GET(req: Request) {
+export async function GET() {
   try {
     const projects = await prisma.project.findMany({
       orderBy: { createdAt: "desc" },
@@ -10,7 +10,7 @@ export async function GET(req: Request) {
     return NextResponse.json(projects);
   } catch (error) {
     return NextResponse.json(
-      { error: "Impossible de récupérer les projets" },
+      { error: error || "Impossible de récupérer les projets" },
       { status: 500 }
     );
   }
@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     return NextResponse.json(project);
   } catch (error) {
     return NextResponse.json(
-      { error: "Impossible de créer le projet" },
+      { error: error || "Impossible de créer le projet" },
       { status: 500 }
     );
   }
@@ -50,7 +50,7 @@ export async function PUT(req: Request) {
     return NextResponse.json(project);
   } catch (error) {
     return NextResponse.json(
-      { error: "Impossible de mettre à jour le projet" },
+      { error: error || "Impossible de mettre à jour le projet" },
       { status: 500 }
     );
   }
@@ -64,7 +64,7 @@ export async function DELETE(req: Request) {
     return NextResponse.json({ message: "Projet supprimé" });
   } catch (error) {
     return NextResponse.json(
-      { error: "Impossible de supprimer le projet" },
+      { error: error || "Impossible de supprimer le projet" },
       { status: 500 }
     );
   }

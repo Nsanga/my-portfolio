@@ -39,7 +39,7 @@ export default function Projects({ projects }: ProjectsProps) {
     }
     
     setFilteredProjects(result);
-  }, [filter, selectedYear]);
+  }, [filter, selectedYear, projects]);
 
   return (
     <section id="projects" className="py-20 px-4 bg-gray-800">
